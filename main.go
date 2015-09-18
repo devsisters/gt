@@ -83,6 +83,7 @@ var (
 	flagV      bool
 	flagShort  bool
 	flagRace   bool
+	flagJson   bool
 	flagList   bool
 	flagForce  bool
 	flagTiming bool
@@ -326,6 +327,9 @@ func computeTestHash(p *Package) {
 	if flagRace {
 		fmt.Fprintf(h, "-race\n")
 	}
+	if flagJson {
+		fmt.Fprintf(h, "-json\n")
+	}
 	if flagShort {
 		fmt.Fprintf(h, "-short\n")
 	}
@@ -492,6 +496,11 @@ func parseFlags() (opts, pkgs []string) {
 		}
 		if arg == "-race" {
 			flagRace = true
+			opts = append(opts, arg)
+			continue
+		}
+		if arg == "-json" {
+			flagJson = true
 			opts = append(opts, arg)
 			continue
 		}
